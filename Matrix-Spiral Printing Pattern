@@ -1,0 +1,49 @@
+My Solution Which I tried---TC-> O(R*C)  SC-> O(1)
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ans=new ArrayList<>();
+
+        int row=matrix.length,col=matrix[0].length;
+        int top=0,right=col-1,bottom=row-1,left=0;
+
+        //Checking the condition if all elements are covered and checking the count of elements we printed
+        
+        while(top<=bottom && left<=right && ans.size()<row*col){
+        
+            //This is for printing elements from first row to last column and will increament top after whole traversal.
+            
+            for(int j=left;j<=right && ans.size()<row*col;j++){
+                ans.add(matrix[top][j]);
+            }
+            top++;
+            
+            //this is for printing elements from top to bottom and decrement right.
+            
+            int toB=right;
+            for(int j=top;j<=bottom && ans.size()<row*col;j++){
+                ans.add(matrix[j][toB]);
+            }
+            right--;
+            
+            // This is for printing elements from bottom to left and will decrement bottom while checking the condition if all rows are covered or not 
+            
+            int rtol=bottom;
+            if(top<=bottom){
+                for(int j=right;j>=left && ans.size()<row*col;j--){
+                    ans.add(matrix[rtol][j]);
+                }
+            }
+            bottom--;
+
+            //This is for printing elements from left to top and will increment left while checking the condition if all columns are covered or not 
+            int ltot=left;
+            if(left<=bottom){
+                for(int j=bottom;j>=top && ans.size()<row*col;j--){
+                    ans.add(matrix[j][ltot]);
+                }
+            }
+            left++;
+        }
+        return ans;
+    }
+}
